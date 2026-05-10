@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Books Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+        
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+        
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        
+        .card h3 {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 10px 0;
+        }
+        
+        .card .detail {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+        
+        .data-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+            opacity: 0;
+            overflow-x: auto;
+        }
+        
+        .data-section h2 {
+            margin-top: 0;
+            margin-bottom: 24px;
+            font-size: 1.8rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        
+        th, td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        th {
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        
+        tr {
+            transition: background-color 0.2s ease;
+        }
+        
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .rating-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Science Books Insights</h1>
+            <div class="subtitle">Data extracted from books.toscrape.com</div>
+        </header>
+        
+        <div class="insights-grid">
+            <div class="card">
+                <h3>Total Books</h3>
+                <div class="value">14</div>
+                <div class="detail">Books analyzed in the Science category</div>
+            </div>
+            <div class="card">
+                <h3>Average Price</h3>
+                <div class="value">£33.09</div>
+                <div class="detail">Across all 14 books</div>
+            </div>
+            <div class="card">
+                <h3>Price Extremes</h3>
+                <div class="value">£57.36</div>
+                <div class="detail">
+                    <strong>Highest:</strong> Immunity: How Elie Metchnikoff Changed the Course of Modern Medicine<br>
+                    <strong>Lowest:</strong> £10.01 (The Origin of Species)
+                </div>
+            </div>
+            <div class="card">
+                <h3>Most Common Rating</h3>
+                <div class="value">Four Stars</div>
+                <div class="detail">
+                    Out of 5 different rating tiers observed
+                </div>
+            </div>
+            <div class="card">
+                <h3>Price Distribution</h3>
+                <div class="value">5</div>
+                <div class="detail">
+                    Books between £20-£40<br>
+                    (4 under £20, 5 over £40)
+                </div>
+            </div>
+            <div class="card">
+                <h3>Priciest Tier</h3>
+                <div class="value">Five Stars</div>
+                <div class="detail">
+                    Highest avg price: £57.36
+                </div>
+            </div>
+        </div>
+        
+        <div class="data-section">
+            <h2>Raw Dataset</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Rating</th>
+                        <th>Availability</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>The Most Perfect Thing: Inside (and Outside) a Bird's Egg</td>
+                        <td>£42.96</td>
+                        <td><span class="rating-badge">Four</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>Immunity: How Elie Metchnikoff Changed the Course of Modern Medicine</td>
+                        <td>£57.36</td>
+                        <td><span class="rating-badge">Five</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>Sorting the Beef from the Bull: The Science of Food Fraud Forensics</td>
+                        <td>£44.74</td>
+                        <td><span class="rating-badge">Four</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>Tipping Point for Planet Earth: How Close Are We to the Edge?</td>
+                        <td>£37.55</td>
+                        <td><span class="rating-badge">One</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>The Fabric of the Cosmos: Space, Time, and the Texture of Reality</td>
+                        <td>£55.91</td>
+                        <td><span class="rating-badge">One</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>Diary of a Citizen Scientist: Chasing Tiger Beetles and Other New Ways of Engaging the World</td>
+                        <td>£28.41</td>
+                        <td><span class="rating-badge">One</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>The Origin of Species</td>
+                        <td>£10.01</td>
+                        <td><span class="rating-badge">Four</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>The Grand Design</td>
+                        <td>£13.76</td>
+                        <td><span class="rating-badge">Three</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>Peak: Secrets from the New Science of Expertise</td>
+                        <td>£16.28</td>
+                        <td><span class="rating-badge">Two</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>The Elegant Universe: Superstrings, Hidden Dimensions, and the Quest for the Ultimate Theory</td>
+                        <td>£13.03</td>
+                        <td><span class="rating-badge">Four</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>The Disappearing Spoon: And Other True Tales of Madness, Love, and the History of the World from the Periodic Table of the Elements</td>
+                        <td>£57.35</td>
+                        <td><span class="rating-badge">Five</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>Surely You're Joking, Mr. Feynman!: Adventures of a Curious Character</td>
+                        <td>£25.83</td>
+                        <td><span class="rating-badge">Two</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>Seven Brief Lessons on Physics</td>
+                        <td>£30.60</td>
+                        <td><span class="rating-badge">Four</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                    <tr>
+                        <td>The Selfish Gene</td>
+                        <td>£29.45</td>
+                        <td><span class="rating-badge">One</span></td>
+                        <td>In stock</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
